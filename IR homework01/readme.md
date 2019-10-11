@@ -69,7 +69,7 @@ A or B的查询是A在B不在则返回所有A的索引，B在A不在则返回所
 
 ![处理前的初始推文格式](https://github.com/479136200/IR-experiments/blob/master/images/L%60HCF2RHTR_QO%40%60HG56AM%7D5.png)
 
-![处理后的推文格式](https://github.com/479136200/IR-experiments/blob/master/images/YJYWY0%40BU%5B%7B)CGK%7D%24Z4)NI7.png)
+![处理后的推文格式](https://github.com/479136200/IR-experiments/blob/master/images/picture3.png)
 
 ![query长度为3的查询结果](https://github.com/479136200/IR-experiments/blob/master/images/picture1.png)
 
