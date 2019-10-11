@@ -29,3 +29,5 @@
 两者的区别是推文的处理去掉了无用项中的word
 
 ![处理前的初始推文格式](https://github.com/479136200/IR-experiments/blob/master/images/L%60HCF2RHTR_QO%40%60HG56AM%7D5.png)
+
+![处理后的推文格式]()
