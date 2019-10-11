@@ -10,6 +10,7 @@
    
    注意，对推文和query都要做同样的预处理
    
+   对推文的处理
    ` result = [] 
     for word in terms:
         expected_str = Word(word)
@@ -17,3 +18,14 @@
         if expected_str not in usefulTerm:     #去掉无用项
             result.append(expected_str)
     return result `
+    
+  对query的处理
+    `    result = []
+    for word in terms:
+        expected_str = Word(word)
+        expected_str = expected_str.lemmatize("v")
+        result.append(expected_str)
+    return result `
+两者的区别是推文的处理去掉了无用项中的word
+
+![处理前的初始推文格式](https://github.com/479136200/images/yaktocat.png)
