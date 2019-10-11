@@ -71,9 +71,9 @@ A or B的查询是A在B不在则返回所有A的索引，B在A不在则返回所
 
 ![处理后的推文格式](https://github.com/479136200/IR-experiments/blob/master/images/YJYWY0%40BU%5B%7B)CGK%7D%24Z4)NI7.png)
 
-![query长度为3的查询结果](https://github.com/479136200/IR-experiments/blob/master/images/%40(M)G8%7BVC%24HK)H%5BK5IXDDH3.png)
+![query长度为3的查询结果](https://github.com/479136200/IR-experiments/blob/master/images/picture1.png)
 
-![query长度为5的查询结果](https://github.com/479136200/IR-experiments/blob/master/images/6_I%40I%605%7DW%5BJ1V35FAS9)ZDG.png)
+![query长度为5的查询结果](https://github.com/479136200/IR-experiments/blob/master/images/picture2.png)
 
 ### 实验体会
 本次实验通过倒排索引的模型实现了简单的布尔查询和嵌套的布尔查询，我认为实验需要注意的地方是对推文和查询语句做同样的预处理，以及实现布尔查询的函数，需要理清逻辑。
