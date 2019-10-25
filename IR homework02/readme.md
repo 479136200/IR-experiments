@@ -3,7 +3,9 @@
 
 ### 实验目的
 在Homework1.1的基础上实现最基本的Ranked retrieval model
+
 • Input：a query (like Ron Weasley birthday)
+
 • Output: Return the top K (e.g., K = 10) relevant tweets.
 • Use SMART notation: lnc.ltc
 • Document: logarithmic tf (l as first character), no idf and cosine 
