@@ -19,6 +19,11 @@ normalization
 #### 原理
 tf:词项频率
 idf:逆文档频率
+tf 即 term frequency, 表示一个 term t 出现在 document d 中的次数，这是文档中一个很重要的概念。出现次数更多意味着重要程度越高，但是需要注意的是，相关度的提高并不是和次数的提高成同比的。因此通常tf需要做如下的处理w1= log10(tf+1)
+df 即 document frequency，表示一个 term 在整个文档集中出现的频率。与 tf 相反，一个 term 的重要程度是随着它在语料库中出现的频率成反比的。比如 and，or 等词在几乎所有文档中都出现，那么这些词的意义就很弱，而一些专业词汇只在几篇文档中出现过，显然意义更加重要。idf 就是 df 取倒数，这里只是为了表示方便。同样，为了弱化频率的效果，我们也做如下处理w2= log10(N/df) 其中N为文档总数，df是文档term在所有文档集合中出现的次数。
+有了上面的tfidf作为权重，我们可以很简单的计算所有词的权重，然后用一个N维的向量来表示一个文档，同样用N维的向量来表示query，query中如果没有对应的term，则该维的权重为0
+在同样的空间中，如果两个向量的夹角越小，说明两个向量越相似，反之两个向量越无关。因此使用cosine定理，我们可以很简单地得到向量之间的相似度
+
 目标是给定查询，从文档集合中返回得分最高的k篇文档。根据向量的相似度来选择得分最高的k篇文档。使用的权重计算机制是lnc.ltc,查询向量采用对数tf计算方法和idf因子，文档向量采用对数tf计算方法，不采用idf因子，因为文档较长，查询语句较短，对文档采用idf会降低效率。
 首先对query中的每个term计算出它在query中的权重（用tf和idf的乘积表示）Wtq=(1+log(tf))*log(N/df),然后对postinglists里的每篇文档更新得分score+=wtq*wtd,其中wtd=(1+log(tf))/cos,(对于文档采用余弦归一化）
 #### 实现
@@ -68,5 +73,5 @@ score+= tf_wght_query * document_frequency[term] * tf_wght_doc / 余弦值
 
 
 ### 实验体会
-本次实验通过lnc.ltc机制实现了对文档权重的得分的计算，在posting list中存储term在每个doc中的TF with pairs (docID, tf)我认为实验需要注意的地方是计算文档、query的df、tf、归一化用到的cos值是每一篇doc的权重的平方和再开平方。
+本次实验我通过lnc.ltc机制实现了对文档权重的得分的计算，在posting list中存储term在每个doc中的TF with pairs (docID, tf)，加深了对向量空间模型的理解，我认为实验需要注意的地方是计算文档、query的df、tf、归一化用到的cos值是每一篇doc的权重的平方和再开平方。
 
