@@ -1,1 +1,107 @@
+import math
+from textblob import TextBlob
+from textblob import Word
+from collections import defaultdict
 
+postings = defaultdict(dict)  # tf posting内存储doc的tf
+document_frequency = defaultdict(dict)  # df
+score = defaultdict(float)
+cosine = defaultdict(float)
+
+# 处理tweets数据集
+def tokenize_tweet(document):
+    global uselessTerm
+    uselessTerm = ["username", "text", "tweetid"]
+    document = document.lower()
+    a = document.index("username")
+    b = document.index("clusterno")
+    c = document.rindex("tweetid") - 1
+    d = document.rindex("errorcode")
+    e = document.index("text")
+    f = document.index("timestr") - 3
+    # 提取用户名、tweet内容和tweetid三部分主要信息
+
+    document = document[c:d] + document[a:b] + document[e:f]
+    terms = TextBlob(document).words.singularize()
+
+    result = []
+    for word in terms:
+        expected_str = Word(word)
+        expected_str = expected_str.lemmatize("v")
+        if expected_str not in uselessTerm:
+            result.append(expected_str)
+
+    return result
+
+# 处理queries
+def token(doc):
+    doc = doc.lower()
+    terms = TextBlob(doc).words.singularize()
+    result = []
+    for word in terms:
+        expected_str = Word(word)
+        expected_str = expected_str.lemmatize("v")
+        result.append(expected_str)
+
+    return result
+
+# 计算存储tf in document 的postings
+def get_postings():
+    f = open(r"C:\Users\dell\Documents\Tencent Files\479136200\FileRecv\tweets.txt")
+    lines = f.readlines()  # 读取全部内容
+    cnt_line = 0
+    for line in lines:
+        line = tokenize_tweet(line)
+        # print(line,file =mediate1)
+        tweetid = line[0]  # 在处理的文本集中取出tweetid单独存储
+        line.pop(0)  # 删除id
+        cosine[tweetid] = 0
+        for te in line:
+            tf_raw_doc = line.count(te)  # 记录tf_raw (document)
+            tf_wght_doc = 1+math.log(tf_raw_doc,10)
+            if te in postings.keys():
+                postings[te].append([tweetid,tf_wght_doc])
+                document_frequency[te]=document_frequency[te]+1#文档的idf
+                cosine[tweetid]=cosine[tweetid]+pow(tf_wght_doc,2) #文档的词频平方和
+            else:
+                postings[te] = [[tweetid,tf_wght_doc]]
+                document_frequency[te] = 1
+                cosine[tweetid] = cosine[tweetid]+tf_wght_doc*tf_wght_doc
+
+        cnt_line = cnt_line + 1  #cnt计算文档总数
+        #print(cnt_line)
+
+    for te in document_frequency:
+        document_frequency[te]=math.log(cnt_line/document_frequency[te],10)
+
+
+def lnc_ltc(query):
+    unique_query = set(query)
+    for term in unique_query:
+
+        tf_wght_query = 1 + math.log(query.count(term), 10)  # query的tf
+
+        for te in postings[term]:
+            tweetid = te[0]
+            score[tweetid] += tf_wght_query * document_frequency[term] * te[1] / math.sqrt(cosine[te[0]])
+
+
+def rank_search():
+    str = token(input("Search query >> "))
+    lnc_ltc(str)
+    ans = sorted(score.items(), key=lambda x: x[1], reverse=True)
+    i = 0
+    print("Return the top 10 relevant tweets:")
+    while i < 10:
+        print(ans[i])
+        i = i + 1
+    print("All relevant tweets:")
+    print(ans)
+
+def main():
+    get_postings()
+    while True:
+        rank_search()
+
+if __name__ == "__main__":
+    main()
