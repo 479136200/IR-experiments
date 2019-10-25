@@ -1,4 +1,4 @@
-# 信息检索实验一
+# 信息检索实验二
 ## 201700150214 王玲雅
 
 ### 实验目的
@@ -55,21 +55,18 @@ idf:逆文档频率
                 document_frequency[te] = 1
                 cosine[tweetid] = cosine[tweetid]+tf_wght_doc*tf_wght_doc`
 
+计算得分
 query的tf:  tf_wght_query = 1 + math.log(query.count(term), 10)
 documents的tf:  tf_wght_doc = 1+math.log(tf_raw_doc,10)
 score+= tf_wght_query * document_frequency[term] * tf_wght_doc / 余弦值
+
        for te in postings[term]:
             tweetid = te[0]
             score[tweetid] += tf_wght_query * document_frequency[term] * te[1] / math.sqrt(cosine[te[0]])
 
-![处理前的初始推文格式](https://github.com/479136200/IR-experiments/blob/master/images/L%60HCF2RHTR_QO%40%60HG56AM%7D5.png)
+![查询结果](https://github.com/479136200/IR-experiments/blob/master/images/L%60HCF2RHTR_QO%40%60HG56AM%7D5.png)
 
-![处理后的推文格式](https://github.com/479136200/IR-experiments/blob/master/images/picture3.png)
-
-![query长度为3的查询结果](https://github.com/479136200/IR-experiments/blob/master/images/picture1.png)
-
-![query长度为5的查询结果](https://github.com/479136200/IR-experiments/blob/master/images/picture2.png)
 
 ### 实验体会
-本次实验通过倒排索引的模型实现了简单的布尔查询和嵌套的布尔查询，我认为实验需要注意的地方是对推文和查询语句做同样的预处理，以及实现布尔查询的函数，需要理清逻辑。
+本次实验通过lnc.ltc机制实现了对文档权重的得分的计算，在posting list中存储term在每个doc中的TF with pairs (docID, tf)我认为实验需要注意的地方是计算文档、query的df、tf、归一化用到的cos值是每一篇doc的权重的平方和再开平方。
 
