@@ -64,7 +64,7 @@ score+= tf_wght_query * document_frequency[term] * tf_wght_doc / 余弦值
             tweetid = te[0]
             score[tweetid] += tf_wght_query * document_frequency[term] * te[1] / math.sqrt(cosine[te[0]])
 
-![查询结果](https://github.com/479136200/IR-experiments/blob/master/images/L%60HCF2RHTR_QO%40%60HG56AM%7D5.png)
+![查询结果](https://github.com/479136200/IR-experiments/blob/master/images/6_I%40I%605%7DW%5BJ1V35FAS9)ZDG.png)
 
 
 ### 实验体会
