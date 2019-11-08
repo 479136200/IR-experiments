@@ -74,7 +74,7 @@ MAP：先计算P_result:序号/排名，然后对于找到相关结果的查询�
             print('query:', query, ' not found a true value')
             AP_result.append(0)
     return np.mean(AP_result)
-![查询结果](https://github.com/479136200/IR-experiments/blob/master/images/D47U~JN%7BCO3ZT9I%24%5BFG2SD7.png)
+![查询结果](https://github.com/479136200/IR-experiments/blob/master/images/%40YYQ0)H%7DAYY_1ONLDPL%7D%60OX.png)
 
 MRR：找第一个相关文档的排名的倒数，若第一个正确答案排在第n位，则RR得分就是1/n，然后对所有查询的RR值求平均就是MRR
 
@@ -93,7 +93,7 @@ MRR：找第一个相关文档的排名的倒数，若第一个正确答案排�
             print('query:', query, ' not found a true value')
             RR_result.append(0)
     return np.mean(RR_result)
-
+![查询结果](https://github.com/479136200/IR-experiments/blob/master/images/D47U~JN%7BCO3ZT9I%24%5BFG2SD7.png)
 
 NDCG：
 
@@ -110,3 +110,4 @@ NDCG：
         print('query', query, ', NDCG: ', NDCG)
         NDCG_result.append(NDCG)
     return np.mean(NDCG_result)
+![查询结果](https://github.com/479136200/IR-experiments/blob/master/images/0P%25P%25C20B5WSO2T%5B%7DG0EVN0.png)
