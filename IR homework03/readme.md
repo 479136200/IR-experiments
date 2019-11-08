@@ -44,7 +44,7 @@ MRR：对所有查询的RR值求平均
 
 
 #### NDCG:
-在MAP中，结果文档和query要么相关，要么不相关，也就是相关度非0即1。NDCG中，相关度分成从0到r的r+1的等级(r可设定)。
+相关度rel:在MAP中，结果文档和query要么相关，要么不相关，也就是相关度非0即1。NDCG中，相关度分成从0到r的r+1的等级(r可设定)。
 
 CG：当假设用户的选择与排序结果无关(即每一级都等概率被选中)，则生成的累计增益值
 
@@ -52,9 +52,9 @@ DCG：考虑到一般情况下用户会优先点选排在前面的搜索结果�
 
 NDCG：为了使不同等级上的搜索结果的得分值容易比较，需要将DCG值归一化得到NDCG值
 
-MaxDCG是理想返回结果List的DCG值
+IDCG是理想返回结果List的DCG值（最大值）
 
-DCG/MaxDCG就得到NDCG值
+DCG/IDCG就得到NDCG值
 
 ### 实现
 
@@ -95,12 +95,7 @@ MRR：找第一个相关文档的排名的倒数，若第一个正确答案排�
     return np.mean(RR_result)
 ![查询结果](https://github.com/479136200/IR-experiments/blob/master/images/D47U~JN%7BCO3ZT9I%24%5BFG2SD7.png)
 
-NDCG：
-
-        length_use = min(k, len(test_result), len(true_list))
-        if length_use <= 0:
-            print('query ', query, ' not found test list')
-            return []
+NDCG：先计算相关度rel，然后用折算因子log2/log(i+1)计算DCG，IDCG，计算每个查询的NDCG = DCG / IDCG，最后求均值就是多个查询的平均 NDCG
         for doc_id in test_result[0: length_use]:
             i += 1
             rel = qrels_dict[query].get(doc_id, 0)
@@ -111,3 +106,14 @@ NDCG：
         NDCG_result.append(NDCG)
     return np.mean(NDCG_result)
 ![查询结果](https://github.com/479136200/IR-experiments/blob/master/images/0P%25P%25C20B5WSO2T%5B%7DG0EVN0.png)
+
+
+### 实验体会
+通过本次实验我掌握了信息检索的几个评价指标的原理及它们的计算方法
+MAP思想：相关文档排序的位置越靠前越好
+MRR思想：返回的结果集的优劣，跟第一个正确答案的位置有关，第一个正确答案越靠前，结果越好。
+NDCG基于两个假设：
+1.强相关的文档应该出现在结果列表前面，且越靠前（rank越高）越有用。
+2.强相关文档比弱相关文档有用，比不相关文档有用
+
+NDCG的缺点是：当排序的数很少（比如：只有1-3个），那么任何排序的nDCG值都比较接近
