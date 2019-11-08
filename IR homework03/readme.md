@@ -74,7 +74,7 @@ MAP：先计算P_result:序号/排名，然后对于找到相关结果的查询�
             print('query:', query, ' not found a true value')
             AP_result.append(0)
     return np.mean(AP_result)
-
+![查询结果](https://github.com/479136200/IR-experiments/blob/master/images/AP44AMAQO%25%7BCO5%40T060%40CKV.png)
 
 MRR：找第一个相关文档的排名的倒数，若第一个正确答案排在第n位，则RR得分就是1/n，然后对所有查询的RR值求平均就是MRR
 
