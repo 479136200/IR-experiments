@@ -59,6 +59,7 @@ DCG/MaxDCG就得到NDCG值
 ### 实现
 
 MAP：先计算P_result:序号/排名，然后对于找到相关结果的查询计算AP值，对没有找到true value的查询把AP值置为0，计算所有查询的AP值的均值即为MAP
+
         for doc_id in test_result[0: length_use]:
             i += 1
             if doc_id in true_list:
