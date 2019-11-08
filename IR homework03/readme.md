@@ -76,5 +76,37 @@ MAP：先计算P_result:序号/排名，然后对于找到相关结果的查询�
     return np.mean(AP_result)
 
 
+MRR：找第一个相关文档的排名的倒数，若第一个正确答案排在第n位，则RR得分就是1/n，然后对所有查询的RR值求平均就是MRR
+
+        for doc_id in test_result[0: length_use]:
+            i += 1
+            if doc_id in true_list:
+                i_retrieval_true = 1
+                P_result.append(i_retrieval_true / i)
+                break
+
+        if P_result:
+            RR = np.sum(P_result)/1.0
+            print('query:', query, ',RR:', RR)
+            RR_result.append(RR)
+        else:
+            print('query:', query, ' not found a true value')
+            RR_result.append(0)
+    return np.mean(RR_result)
 
 
+NDCG：
+
+        length_use = min(k, len(test_result), len(true_list))
+        if length_use <= 0:
+            print('query ', query, ' not found test list')
+            return []
+        for doc_id in test_result[0: length_use]:
+            i += 1
+            rel = qrels_dict[query].get(doc_id, 0)
+            DCG += (pow(2, rel) - 1) / math.log(i, 2)
+            IDCG += (pow(2, true_list[i - 2]) - 1) / math.log(i, 2)
+        NDCG = DCG / IDCG
+        print('query', query, ', NDCG: ', NDCG)
+        NDCG_result.append(NDCG)
+    return np.mean(NDCG_result)
