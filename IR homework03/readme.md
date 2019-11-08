@@ -50,6 +50,8 @@ CG：当假设用户的选择与排序结果无关(即每一级都等概率被�
 
 DCG：考虑到一般情况下用户会优先点选排在前面的搜索结果，所以应该引入一个折算因子(discounting factor): log(2)/log(1+rank)。这时将获得DCG值(Discounted Cumulative Gain)
 
+DCG计算公式：![查询结果](https://github.com/479136200/IR-experiments/blob/master/images/dcg.png)
+
 NDCG：为了使不同等级上的搜索结果的得分值容易比较，需要将DCG值归一化得到NDCG值
 
 IDCG是理想返回结果List的DCG值（最大值）
@@ -96,6 +98,7 @@ MRR：找第一个相关文档的排名的倒数，若第一个正确答案排�
 ![查询结果](https://github.com/479136200/IR-experiments/blob/master/images/D47U~JN%7BCO3ZT9I%24%5BFG2SD7.png)
 
 NDCG：先计算相关度rel，然后用折算因子log2/log(i+1)计算DCG，IDCG，计算每个查询的NDCG = DCG / IDCG，最后求均值就是多个查询的平均 NDCG
+
         for doc_id in test_result[0: length_use]:
             i += 1
             rel = qrels_dict[query].get(doc_id, 0)
