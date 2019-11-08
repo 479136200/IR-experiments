@@ -56,6 +56,24 @@ MaxDCG是理想返回结果List的DCG值
 
 DCG/MaxDCG就得到NDCG值
 
+### 实现
+
+MAP：先计算P_result:序号/排名，然后对于找到相关结果的查询计算AP值，对没有找到true value的查询把AP值置为0，计算所有查询的AP值的均值即为MAP
+        for doc_id in test_result[0: length_use]:
+            i += 1
+            if doc_id in true_list:
+                i_retrieval_true += 1
+                P_result.append(i_retrieval_true / i)
+
+        if P_result:
+            AP = np.sum(P_result) / len(true_list)
+            print('query:', query, ',AP:', AP)
+            AP_result.append(AP)
+        else:
+            print('query:', query, ' not found a true value')
+            AP_result.append(0)
+    return np.mean(AP_result)
+
 
 
 
