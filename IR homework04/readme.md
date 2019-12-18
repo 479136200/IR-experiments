@@ -1,9 +1,9 @@
 # 信息检索实验四
-## 实验目的：
+### 实验目的
 
 测试sklearn中的几种聚类算法在两个数据集sklearn.datasets.load_digits和sklearn.datasets.fetch_20newsgroups上的聚类效果
 
-## 实验内容
+### 实验内容
 1.库的调用： 
 
 直接从sklearn的库加载数据集。手写数字数据集包括1797个0-9的手写数字数据，每个数字由8X8大小的矩阵构成，矩阵中值的范围是0-16，代表颜色的深度，使用sklearn.datasets.load_digits即可加载数据集。使用sklearn.datasets import fetch_20newsgroups即可加载新闻数据集。
@@ -53,30 +53,33 @@ bench_k_means(MeanShift(bandwidth=bandwidth, bin_seeding=True),name="MeanShift",
 
 对降到二维的数据做聚类：
 
-kmeans = KMeans(init='k-means++', n_clusters=n_digits, n_init=10)
+    kmeans = KMeans(init='k-means++', n_clusters=n_digits, n_init=10)
 
-kmeans.fit(reduced_data)
+    kmeans.fit(reduced_data)
 
-result = kmeans.labels_
+    result = kmeans.labels_
 
-plt.figure(2)
+    plt.figure(2)
 
-plt.clf()
+    plt.clf()
 
-plt.scatter(reduced_data[:, 0], reduced_data[:, 1],c=result)
+    plt.scatter(reduced_data[:, 0], reduced_data[:, 1],c=result)
 
-centroids = kmeans.cluster_centers_
+    centroids = kmeans.cluster_centers_
 
-plt.scatter(centroids[:, 0], centroids[:, 1],
+    plt.scatter(centroids[:, 0], centroids[:, 1],
 
             marker='x', s=169, linewidths=3,
             
             color='w', zorder=10)
             
-plt.show()
+    plt.show()
 
-6.可视化效果展示
+6.评估指标及可视化效果展示
 
 ![查询结果](https://github.com/479136200/IR-experiments/blob/master/images/picturemap.png)
+![查询结果](https://github.com/479136200/IR-experiments/blob/master/images/picturemap.png)
+![查询结果](https://github.com/479136200/IR-experiments/blob/master/images/picturemap.png)
+![查询结果](https://github.com/479136200/IR-experiments/blob/master/images/picturemap.png)
 
-
+### 实验体会
