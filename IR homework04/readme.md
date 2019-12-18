@@ -77,9 +77,9 @@ bench_k_means(MeanShift(bandwidth=bandwidth, bin_seeding=True),name="MeanShift",
 
 6.评估指标及可视化效果展示
 
-![查询结果](https://github.com/479136200/IR-experiments/blob/master/images/picturemap.png)
-![查询结果](https://github.com/479136200/IR-experiments/blob/master/images/%7D_TKE~XJ3T%7DGM3J2HZ~0KRB.png)
-![查询结果](https://github.com/479136200/IR-experiments/blob/master/images/picturemap.png)
-![查询结果](https://github.com/479136200/IR-experiments/blob/master/images/picturemap.png)
+![查询结果](https://github.com/479136200/IR-experiments/blob/master/images/聚类图1.png)
+![查询结果](https://github.com/479136200/IR-experiments/blob/master/images/聚类图2.png)
+![查询结果](https://github.com/479136200/IR-experiments/blob/master/images/result1.png)
+![查询结果](https://github.com/479136200/IR-experiments/blob/master/images/result2.png)
 
 ### 实验体会
