@@ -83,3 +83,4 @@ bench_k_means(MeanShift(bandwidth=bandwidth, bin_seeding=True),name="MeanShift",
 ![查询结果](https://github.com/479136200/IR-experiments/blob/master/images/result2.png)
 
 ### 实验体会
+通过这次实验我了解了聚类算法的评价指标以及比较了几种聚类算法的效果，需要注意的就是在可视化的时候要降到二维再聚类
