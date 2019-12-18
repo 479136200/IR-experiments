@@ -1,5 +1,7 @@
 # 信息检索实验四
-## 实验目的：测试sklearn中的几种聚类算法在两个数据集sklearn.datasets.load_digits和sklearn.datasets.fetch_20newsgroups上的聚类效果
+## 实验目的：
+
+测试sklearn中的几种聚类算法在两个数据集sklearn.datasets.load_digits和sklearn.datasets.fetch_20newsgroups上的聚类效果
 
 ## 实验内容
 1.库的调用： 直接从sklearn的库加载数据集。手写数字数据集包括1797个0-9的手写数字数据，每个数字由8X8大小的矩阵构成，矩阵中值的范围是0-16，代表颜色的深度，使用sklearn.datasets.load_digits即可加载数据集。使用sklearn.datasets import fetch_20newsgroups即可加载新闻数据集。
@@ -47,6 +49,6 @@ plt.scatter(centroids[:, 0], centroids[:, 1],
 plt.show()
 
 6.可视化效果展示
-
+![查询结果](https://github.com/479136200/IR-experiments/blob/master/images/picturemap.png)
 
 
