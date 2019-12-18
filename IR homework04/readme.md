@@ -55,15 +55,24 @@ bench_k_means(MeanShift(bandwidth=bandwidth, bin_seeding=True),name="MeanShift",
 
 kmeans = KMeans(init='k-means++', n_clusters=n_digits, n_init=10)
 
-kmeans.fit(reduced_data)  # 对降维后的数据进行kmeans
+kmeans.fit(reduced_data)
+
 result = kmeans.labels_
+
 plt.figure(2)
+
 plt.clf()
+
 plt.scatter(reduced_data[:, 0], reduced_data[:, 1],c=result)
+
 centroids = kmeans.cluster_centers_
+
 plt.scatter(centroids[:, 0], centroids[:, 1],
+
             marker='x', s=169, linewidths=3,
+            
             color='w', zorder=10)
+            
 plt.show()
 
 6.可视化效果展示
